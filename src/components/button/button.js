@@ -36,40 +36,59 @@ export default class Button extends Component {
         let children = this.props.children
         const kids = (children || children === 0)
             ? children : null;
-        let className = this.state.down ? 'enj-btn-down' : 'enj-btn'
+        let type = this.props.type || 'primary'
+        let className = classnames(this.state.down, type)
         let move = (this.state.down && this.state.toggle) ? true : false
         let toggleMove = (this.state.down && !this.state.toggle) ? true : false
+        let disabled = type == 'disabled'
         return (
             <span className="enj-wrap">
-                <span
-                    {...this.props}
-                    className={className}
-                    onMouseDown={this.handleMouseDown}
-                    onMouseUp={this.handleMouseUp}
-                    onClick={this.handleClick}>
-                    {kids}
-                </span>
-                <BgEles move={move} />
-                <BgElesToggle move={toggleMove} />
+                {
+                    disabled
+                        ? <button
+                            disabled
+                            {...this.props}
+                            className={className}
+                            onMouseDown={this.handleMouseDown}
+                            onMouseUp={this.handleMouseUp}
+                            onClick={this.handleClick}>
+                            {kids}
+                        </button>
+                        : <button
+                            {...this.props}
+                            className={className}
+                            onMouseDown={this.handleMouseDown}
+                            onMouseUp={this.handleMouseUp}
+                            onClick={this.handleClick}>
+                            {kids}
+                        </button>
+                }
+                <BgEles move={move} type={type} />
+                <BgElesToggle move={toggleMove} type={type} />
             </span>
         )
     }
 }
+function classnames(down, type) {
+    return down ? ('enj-btn-down ' + type + '-down') : ('enj-btn ' + type)
+}
 
 function BgEles(props) {
+    let type = props.type
     return (
         <React.Fragment>
             <BgEle
+                type={type}
                 move={props.move}
                 start_options={{
-                    width: 4,
-                    height: 4,
+                    width: 5,
+                    height: 5,
                     left: '55px',
                     top: '-12px'
                 }}
                 end_options={{
-                    width: 4,
-                    height: 4,
+                    width: 5,
+                    height: 5,
                     left: '55px',
                     top: '-12px',
                     opacity: 1,
@@ -77,16 +96,17 @@ function BgEles(props) {
                 }}
             />
             <BgEle
+                type={type}
                 move={props.move}
                 start_options={{
-                    width: 8,
-                    height: 8,
+                    width: 9,
+                    height: 9,
                     left: '55px',
                     top: '-12px'
                 }}
                 end_options={{
-                    width: 7,
-                    height: 7,
+                    width: 9,
+                    height: 9,
                     left: '40px',
                     top: '-20px',
                     opacity: 1,
@@ -95,6 +115,7 @@ function BgEles(props) {
             />
             {/* 空心圆 */}
             <BgEleVoid
+                type={type}
                 move={props.move}
                 start_options={{
                     width: 5,
@@ -114,16 +135,17 @@ function BgEles(props) {
             />
             {/* 反方向 */}
             <BgEle
+                type={type}
                 move={props.move}
                 start_options={{
-                    width: 4,
-                    height: 4,
+                    width: 5,
+                    height: 5,
                     right: '55px',
                     bottom: '-12px'
                 }}
                 end_options={{
-                    width: 4,
-                    height: 4,
+                    width: 5,
+                    height: 5,
                     right: '55px',
                     bottom: '-12px',
                     opacity: 1,
@@ -131,16 +153,17 @@ function BgEles(props) {
                 }}
             />
             <BgEle
+                type={type}
                 move={props.move}
                 start_options={{
-                    width: 8,
-                    height: 8,
+                    width: 9,
+                    height: 9,
                     right: '55px',
                     bottom: '-12px'
                 }}
                 end_options={{
-                    width: 7,
-                    height: 7,
+                    width: 9,
+                    height: 9,
                     right: '40px',
                     bottom: '-20px',
                     opacity: 1,
@@ -149,6 +172,7 @@ function BgEles(props) {
             />
             {/* 空心圆 */}
             <BgEleVoid
+                type={type}
                 move={props.move}
                 start_options={{
                     width: 5,
@@ -170,9 +194,11 @@ function BgEles(props) {
     )
 }
 function BgElesToggle(props) {
+    let type = props.type
     return (
         <React.Fragment>
             <BgEle
+                type={type}
                 move={props.move}
                 start_options={{
                     left: '70px',
@@ -186,6 +212,7 @@ function BgElesToggle(props) {
                 }}
             />
             <BgEle
+                type={type}
                 move={props.move}
                 start_options={{
                     left: '5px',
@@ -200,6 +227,7 @@ function BgElesToggle(props) {
             />
             {/* 空心圆 */}
             <BgEleVoid
+                type={type}
                 move={props.move}
                 start_options={{
                     width: 5,
@@ -220,6 +248,7 @@ function BgElesToggle(props) {
             />
             {/* 反方向 */}
             <BgEle
+                type={type}
                 move={props.move}
                 start_options={{
                     right: '70px',
@@ -233,6 +262,7 @@ function BgElesToggle(props) {
                 }}
             />
             <BgEle
+                type={type}
                 move={props.move}
                 start_options={{
                     right: '5px',
@@ -247,6 +277,7 @@ function BgElesToggle(props) {
             />
             {/* 空心圆 */}
             <BgEleVoid
+                type={type}
                 move={props.move}
                 start_options={{
                     width: 5,

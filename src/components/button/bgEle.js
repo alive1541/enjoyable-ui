@@ -7,10 +7,9 @@ export default class Ele extends Component {
         let common_style = Object.assign({}, {
             position: 'absolute',
             display: 'inline-block',
-            width: '6px',
-            height: '6px',
+            width: '7px',
+            height: '7px',
             borderRadius: '50%',
-            backgroundColor: '#26A69A',
             transition: 'transform .4s linear',
             opacity: 0,
             zIndex: 9999
@@ -30,7 +29,9 @@ export default class Ele extends Component {
     }
     render() {
         let style = this.state.move ? this.state.end_style : this.state.start_style
+        let classname = this.props.type + '-ele'
         return <span
+            className={classname}
             style={style} />
     }
 }

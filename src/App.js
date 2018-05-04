@@ -9,12 +9,17 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Welcome to enjoyable-ui</h1>
         </header>
+        <p className="title">Button按钮</p>
         <p className="App-intro">
-          <Button><span>点击</span></Button>
+          <Button type="primary"><span>PRIMARY</span></Button>
+          <Button type="default"><span>DEFAULT</span></Button>
+          <Button type="dashed"><span>DASHED</span></Button>
+          <Button type="danger"><span>DANGER</span></Button>
+          <Button type="disabled"><span>DISABLED</span></Button>
         </p>
+
       </div>
     );
   }

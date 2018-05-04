@@ -6,13 +6,14 @@ let num = 0
 export default class EleVoid extends Component {
     constructor(props) {
         super(props)
+        let border = this.props.type == 'danger' ? '1px solid #D84315' : '1px solid #26A69A'
         let common_style = Object.assign({}, {
             position: 'absolute',
             display: 'inline-block',
             width: '6px',
             height: '6px',
             borderRadius: '50%',
-            border: '1px solid #26A69A',
+            border,
             opacity: 0,
             transition: 'transform .4s linear, opacity .4s ease-in',
             zIndex: 9999,
@@ -35,7 +36,9 @@ export default class EleVoid extends Component {
     }
     render() {
         let style = this.state.move ? this.state.end_style : this.state.start_style
+        let classname = this.props.type + '-ele-void'
         return <span
+            className={classname}
             style={style} />
     }
 }
